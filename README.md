@@ -1,5 +1,7 @@
-# Sphring MicroWebFramework
+# CIWatch
 
-[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE) [![Build Status](https://travis-ci.org/sphring/sphring-microwebframe.svg)](https://travis-ci.org/sphring/sphring-microwebframe) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sphring/sphring-microwebframe/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sphring/sphring-microwebframe/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/sphring/sphring-microwebframe/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/sphring/sphring-microwebframe/?branch=master) [![SensioLabsInsight](https://insight.sensiolabs.com/projects/b8235581-6f24-4c7a-95ec-a666aff8ebf2/small.png)](https://insight.sensiolabs.com/projects/b8235581-6f24-4c7a-95ec-a666aff8ebf2)
+This is a useful tool to see all status from your ci tools in a wink (tools like travis, scrutinizer, SensioLabsInsight or CodeClimate).
 
-[![Logo Sphring MicroWebFrame](https://cdn.rawgit.com/sphring/sphring-microwebframe/master/app/assets/image/logo.png)](Logo Sphring MicroWebFrame)
+It provides also tools to directly create CI environment in one time and permit you to restart inspection on a repo.
+
+[![Logo CIWatch](https://cdn.rawgit.com/ArthurHlt/ciwatch/master/app/assets/image/logo.png)](Logo CIWatch)
