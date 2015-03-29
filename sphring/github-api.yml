@@ -1,0 +1,15 @@
+github.client:
+  class: Github\Client
+  constructor:
+    1:
+      ref: github.client.cache
+github.client.cache:
+  class: Github\HttpClient\CachedHttpClient
+  properties:
+    cache:
+      ref: github.client.cache.type
+github.client.cache.type:
+  class: Github\HttpClient\Cache\FilesystemCache
+  constructor:
+    1:
+      value: %CONTEXTROOT%/..%config.cacheDir%

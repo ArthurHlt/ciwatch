@@ -1,0 +1,27 @@
+microwebframe.githubOauth:
+  class: League\OAuth2\Client\Provider\Github
+  constructor:
+    1:
+      value:
+        clientId: %github_ciwatch_id%
+        clientSecret: %github_ciwatch_secret%
+        scopes:
+          - user:email
+          - public_repo
+          - read:org
+          - repo_deployment
+          - repo:status
+          - write:repo_hook
+microwebframe.helpers:
+  class: \ArrayObject
+  constructor:
+      1:
+        ref:
+          engine: microwebframe.engine
+          microWebFramework: microwebframe.main
+          doctrineBoot: microwebframe.doctrine
+          githubProvider: microwebframe.githubOauth
+          githubApi: github.client
+          encryptor: encryptor
+          providers: providers
+          cache: microwebframe.doctrine.cache

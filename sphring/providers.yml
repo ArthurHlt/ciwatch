@@ -1,0 +1,21 @@
+provider.abstract:
+  type: abstract
+  properties:
+    userSession:
+      ref: microwebframe.platesExtensionUserSession
+provider.scrutinizer:
+  extend: provider.abstract
+  class: Sphring\MicroWebFramework\Providers\ScrutinizerProvider
+provider.travis:
+  extend: provider.abstract
+  class: Sphring\MicroWebFramework\Providers\TravisProvider
+  properties:
+    apiUrl:
+      value: %api.travis.url%
+providers:
+  class: \ArrayObject
+  constructor:
+      1:
+        ref:
+          - provider.travis
+          - provider.scrutinizer

@@ -1,0 +1,36 @@
+index:
+  route: "/"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.IndexController()
+login:
+  route: "/login"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.LoginController()
+logout:
+  route: "/logout"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.LogoutController()
+show:
+  route: "/show"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.ShowController()
+profile:
+  route: "/profile"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.ProfileController()
+syncRepoGithub:
+  route: "/syncRepoGithub"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.SyncRepoController()
+addRepo:
+  route: "/addrepo"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.AddRepoController()
+addRepoPost:
+  route: "/addrepopost"
+  method: "POST"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.AddRepoController()
+notfound:
+  route: "/404"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.NotFoundController()

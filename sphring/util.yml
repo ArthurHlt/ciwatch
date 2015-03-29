@@ -1,0 +1,9 @@
+encryptor:
+  class: Sphring\MicroWebFramework\Util\Encryptor
+  properties:
+    checksumFile:
+      value: %security.checksumKeyFile%
+    keyFile:
+      file: %CONTEXTROOT%/../config/key.txt
+    generatedKey:
+      value: %ciwatch_key%

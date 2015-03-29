@@ -1,0 +1,10 @@
+config:
+  entryPoint: '/app.php'
+  assetsDir: '/assets'
+  debug: true
+  cacheDir: '/cache'
+security:
+  checksumKeyFile: 'ff4ca77a221861104c7a897a04bdeaf7'
+api:
+  travis:
+    url: 'https://api.travis-ci.org'
