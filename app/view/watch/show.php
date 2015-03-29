@@ -37,7 +37,9 @@ if (!($user instanceof \Sphring\MicroWebFramework\Model\User)) {
                     <?php foreach ($user->getRepos() as $repo): ?>
                         <?php if (!$repo->getWatch()): continue; endif; ?>
                         <tr>
-                            <td><?php echo $repo->getFullName(); ?></td>
+                            <td>
+                                <a href="https://github.com/<?php echo $repo->getFullName(); ?>"><?php echo $repo->getFullName(); ?></a>
+                            </td>
                             <td>
                                 <?php foreach ($providers as $provider): ?>
                                     <?php echo $provider->getImage($repo); ?>

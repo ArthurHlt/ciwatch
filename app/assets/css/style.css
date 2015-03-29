@@ -79,6 +79,16 @@ footer p {
     background-color: #4e5d6c;
 }
 
+.addRepoPanel a,
+.addRepoPanel a:active {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+.addRepoPanel a:hover {
+    text-decoration: none;
+}
+
 /*
  * Main content
  */

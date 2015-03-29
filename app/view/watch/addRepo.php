@@ -43,9 +43,12 @@ function isWatched($repo, \Sphring\MicroWebFramework\Model\User $user)
                         <?php foreach ($repos as $repo): ?>
                             <form method="post" action="<?php echo $this->route('addRepoPost'); ?>">
                                 <div class="form-group">
+
                                     <label
                                         for="<?php echo $repo['full_name']; ?>"
-                                        class="labelName"><?php echo $repo['full_name']; ?></label>
+                                        class="labelName">
+                                        <a href="<?php echo $repo['html_url']; ?>"><?php echo $repo['full_name']; ?></a>
+                                    </label>
                                     <input type="checkbox"
                                            class="addRepoButton" <?php echo(isWatched($repo, $user) ? 'checked' : null); ?>
                                            data-offstyle="info" data-toggle="toggle"
