@@ -53,18 +53,21 @@ footer p {
         left: 0;
         z-index: 1000;
         display: block;
-        padding: 20px;
         overflow-x: hidden;
         overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
         background-color: #485563;
+        padding: 0;
+        padding-top: 10px;
     }
 }
 
 /* Sidebar navigation */
+
 .nav-sidebar {
-    margin-right: -21px; /* 20px padding + 1px border */
+    position: relative;
+    width: 100%;
+    margin-right: 0px;
     margin-bottom: 20px;
-    margin-left: -20px;
 }
 
 .nav-sidebar > li > a {
