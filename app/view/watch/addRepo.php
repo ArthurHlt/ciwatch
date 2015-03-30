@@ -1,15 +1,18 @@
 <?php
 $this->layout('layout.php', array('title' => 'CIWatch - Add repo'));
 $user = $this->userSession();
+
 if (!($user instanceof \Sphring\MicroWebFramework\Model\User)) {
     exit();
 }
 function isWatched($repo, \Sphring\MicroWebFramework\Model\User $user)
 {
-    $userRepos = $user->getRepos();
-    foreach ($userRepos as $userRepo) {
+    $userRepos = $user->getUserRepos();
+
+    foreach ($userRepos as $userRepoAssoc) {
+        $userRepo = $userRepoAssoc->getRepo();
         if ($userRepo->getFullName() === $repo['full_name']) {
-            return $userRepo->getWatch();
+            return $userRepoAssoc->getWatch();
         }
     }
     return false;

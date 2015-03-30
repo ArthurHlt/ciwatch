@@ -16,6 +16,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
 use Doctrine\ORM\Mapping\Table;
 use JMS\Serializer\Annotation\Type;
 
@@ -62,11 +63,10 @@ class User
     protected $imageUrl;
 
     /**
-     * @var Repo[]
-     * @ManyToMany(targetEntity="Repo", inversedBy="users")
-     * @Type("array<Sphring\MicroWebFramework\Model\Repo>")
+     * @var UserRepo[]
+     * @OneToMany(targetEntity="UserRepo", mappedBy="user")
      */
-    private $repos = [];
+    protected $userRepos = [];
     /**
      * @var string
      * @Column(type="string", nullable=true)
@@ -149,42 +149,6 @@ class User
     }
 
     /**
-     * @return Repo[]
-     */
-    public function getRepos()
-    {
-        return $this->repos;
-    }
-
-    /**
-     * @param Repo[] $repos
-     */
-    public function setRepos($repos)
-    {
-        foreach ($repos as $repo) {
-            $this->addRepo($repo);
-        }
-    }
-
-    public function addRepo(Repo $repo)
-    {
-        if (is_array($this->repos) && in_array($repo, $this->repos)) {
-            return;
-        }
-        $this->repos[] = $repo;
-        $repo->addUser($this);
-    }
-
-    public function delRepo(Repo $repo)
-    {
-        if (is_array($this->repos) && !in_array($repo, $this->repos)) {
-            return;
-        }
-        $repo->delUser($this);
-        unset($this->repos[array_search($repo, $this->repos)]);
-    }
-
-    /**
      * @return string
      */
     public function getScrutinizerToken()
@@ -199,5 +163,36 @@ class User
     {
         $this->scrutinizerToken = $scrutinizerToken;
     }
-    
+
+    /**
+     * @return UserRepo[]
+     */
+    public function getUserRepos()
+    {
+        return $this->userRepos;
+    }
+
+    /**
+     * @param UserRepo[] $userRepos
+     */
+    public function setUserRepos($userRepos)
+    {
+        $this->userRepos = $userRepos;
+    }
+
+    /**
+     * @param UserRepo $userRepo
+     * @return $this
+     */
+    public function addUserRepoAssociation(UserRepo $userRepo)
+    {
+        $this->userRepos[] = $userRepo;
+
+        return $this;
+    }
+
+    public function removeUserRepoAssociation(UserRepo $userRepo)
+    {
+        $this->userRepos->removeElement($userRepo);
+    }
 }

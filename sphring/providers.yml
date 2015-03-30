@@ -3,13 +3,24 @@ provider.abstract:
   properties:
     userSession:
       ref: microwebframe.platesExtensionUserSession
-provider.scrutinizer:
+provider.scrutinizer.coverage:
   extend: provider.abstract
-  class: Sphring\MicroWebFramework\Providers\ScrutinizerProvider
+  class: Sphring\MicroWebFramework\Providers\ScrutinizerCoverageProvider
+  properties:
+    imageUrl:
+      value: %api.scrutinizer.imgUrlCoverage%
+provider.scrutinizer.quality:
+  extend: provider.abstract
+  class: Sphring\MicroWebFramework\Providers\ScrutinizerQualityProvider
+  properties:
+    imageUrl:
+      value: %api.scrutinizer.imgUrlQuality%
 provider.travis:
   extend: provider.abstract
   class: Sphring\MicroWebFramework\Providers\TravisProvider
   properties:
+    imageUrl:
+      value: %api.travis.imgUrl%
     apiUrl:
       value: %api.travis.url%
 providers:
@@ -18,4 +29,5 @@ providers:
       1:
         ref:
           - provider.travis
-          - provider.scrutinizer
+          - provider.scrutinizer.coverage
+          - provider.scrutinizer.quality

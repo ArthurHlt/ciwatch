@@ -114,3 +114,7 @@ footer p {
 footer {
     text-align: center;
 }
+
+.showRepo td a {
+    text-decoration: none !important;
+}

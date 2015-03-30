@@ -13,23 +13,21 @@
 namespace Sphring\MicroWebFramework\Controller\Ciwatch;
 
 
+use Sphring\MicroWebFramework\MicroWebFrameworkRunner;
+
 class ShowController extends AbstractCiWatchController
 {
     public function action()
     {
         parent::action();
 
-        $repos = $this->getUserSession()->getRepos();
         $showTable = false;
-        foreach ($repos as $repo) {
-            if ($repo->getWatch()) {
-                $showTable = true;
-                break;
-            }
-        }
+        $repoDao = MicroWebFrameworkRunner::getInstance()->getBean('dao.repo');
+
+        $repos = $repoDao->findRepoWatched($this->getUserSession());
         return $this->getEngine()->render('watch/show.php', [
             'providers' => $this->getProviders(),
-            'showTable' => $showTable
+            'repos' => $repos
         ]);
     }
 }

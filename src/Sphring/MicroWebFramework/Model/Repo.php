@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
 use JMS\Serializer\Annotation\Type;
 
 
@@ -16,41 +17,26 @@ use JMS\Serializer\Annotation\Type;
 class Repo
 {
     /**
+     * @var UserRepo[]
+     * @OneToMany(targetEntity="UserRepo", mappedBy="repo")
+     */
+    protected $userRepos;
+    /**
      * @Id()
      * @Column(type="integer")
      * @Type("integer")
      */
     private $id;
-
     /**
      * @Column(type="string", nullable=true)
      * @Type("string")
      */
     private $name;
-
     /**
      * @Column(type="string", nullable=true)
      * @Type("string")
      */
     private $full_name;
-
-    /**
-     * @Column(type="boolean", nullable=false, options={"default":false})
-     * @Type("boolean")
-     */
-    private $watch;
-
-    /**
-     * @var User[]
-     * @ManyToMany(targetEntity="User", inversedBy="repos")
-     * @JoinTable(
-     *     name="User_To_Repo",
-     *     joinColumns={@JoinColumn(name="repo_id", referencedColumnName="id", nullable=false)},
-     *     inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id", nullable=false)}
-     * )
-     * @Type("array<Sphring\MicroWebFramework\Model\User>")
-     */
-    private $users = [];
     /**
      * @var string
      * @Column(type="string")
@@ -64,6 +50,14 @@ class Repo
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -98,57 +92,6 @@ class Repo
         $this->full_name = $full_name;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getWatch()
-    {
-        return $this->watch;
-    }
-
-    /**
-     * @param mixed $watch
-     */
-    public function setWatch($watch)
-    {
-        $this->watch = $watch;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
-
-    /**
-     * @param User[] $users
-     */
-    public function setUsers($users)
-    {
-        foreach ($users as $user) {
-            $this->addUser($user);
-        }
-    }
-
-    public function addUser(User $user)
-    {
-        if (is_array($this->users) && in_array($user, $this->users)) {
-            return;
-        }
-        $this->users[] = $user;
-        $user->addRepo($this);
-    }
-
-    public function delUser(User $user)
-    {
-        if (is_array($this->users) && !in_array($user, $this->users)) {
-            return;
-        }
-        $user->delRepo($this);
-        unset($this->users[array_search($user, $this->users)]);
-    }
 
     /**
      * @return string
@@ -167,11 +110,35 @@ class Repo
     }
 
     /**
-     * @param mixed $id
+     * @return UserRepo[]
      */
-    public function setId($id)
+    public function getUserRepos()
     {
-        $this->id = $id;
+        return $this->userRepos;
+    }
+
+    /**
+     * @param UserRepo[] $userRepos
+     */
+    public function setUserRepos($userRepos)
+    {
+        $this->userRepos = $userRepos;
+    }
+
+    /**
+     * @param UserRepo $userRepo
+     * @return $this
+     */
+    public function addUserRepoAssociation(UserRepo $userRepo)
+    {
+        $this->userRepos[] = $userRepo;
+
+        return $this;
+    }
+
+    public function removeUserRepoAssociation(UserRepo $userRepo)
+    {
+        $this->userRepos->removeElement($userRepo);
     }
 
 }

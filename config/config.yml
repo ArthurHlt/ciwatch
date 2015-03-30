@@ -8,3 +8,13 @@ security:
 api:
   travis:
     url: 'https://api.travis-ci.org'
+    imgUrl: '<a href="https://travis-ci.org/%s"><img alt="Build Status %s" src="https://travis-ci.org/%s.svg?branch=%s"></a>'
+  scrutinizer:
+    imgUrlCoverage: >
+                      <a href = "https://scrutinizer-ci.com/g/%s/?branch=%s" >
+                      <img src = "https://scrutinizer-ci.com/g/%s/badges/coverage.png?b=%s" alt = "Code Coverage %s" />
+                      </a >
+    imgUrlQuality: >
+                     <a href="https://scrutinizer-ci.com/g/%s/?branch=%s">
+                     <img src="https://scrutinizer-ci.com/g/%s/badges/quality-score.png?b=%s" alt="Scrutinizer Code Quality %s"/>
+                     </a>

@@ -26,8 +26,7 @@ class TravisProvider extends AbstractProvider
 
     public function getImage(Repo $repo, $branch = "master")
     {
-        $imgText = '<a href="https://travis-ci.org/%s"><img alt="Build Status %s" src="https://travis-ci.org/%s.svg?branch=%s"></a>';
-        return sprintf($imgText, $repo->getFullName(), $repo->getFullName(), $repo->getFullName(), $branch);
+        return sprintf($this->imageUrl, $repo->getFullName(), $repo->getFullName(), $repo->getFullName(), $branch);
     }
 
     public function runInspection(Repo $repo, $branch = "master")

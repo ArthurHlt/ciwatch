@@ -13,8 +13,10 @@
 namespace Sphring\MicroWebFramework\Controller\Ciwatch;
 
 
+use Sphring\MicroWebFramework\MicroWebFrameworkRunner;
 use Sphring\MicroWebFramework\Model\Repo;
 use Sphring\MicroWebFramework\Model\User;
+use Sphring\MicroWebFramework\Model\UserRepo;
 
 class AddRepoController extends AbstractCiWatchController
 {
@@ -36,6 +38,7 @@ class AddRepoController extends AbstractCiWatchController
             $this->response->setStatusCode(404);
             return '';
         }
+        $userRepoDao = MicroWebFrameworkRunner::getInstance()->getBean('dao.userrepo');
         ignore_user_abort(true);
         $entityManager = $this->getEntityManager();
         $repo = $entityManager->find(Repo::class, (int)$_POST['id']);
@@ -43,7 +46,7 @@ class AddRepoController extends AbstractCiWatchController
             $this->createRepoFromGithub($_POST['full_name']);
             return '';
         }
-
+        $user = $entityManager->find(User::class, $this->getUserSession()->getId());
         $githubApi = $this->getGithubApi();
         $fullname = explode('/', $_POST['full_name']);
         $branchesGithub = $githubApi->api('repo')->branches($fullname[0], $fullname[1]);
@@ -51,9 +54,11 @@ class AddRepoController extends AbstractCiWatchController
         foreach ($branchesGithub as $brancheGithub) {
             $branches[] = $brancheGithub['name'];
         }
-        $repo->setWatch(($repo->getWatch() ? false : true));
+        $userRepo = $userRepoDao->findByUserRepo($user, $repo);
+        $userRepo->setWatch(($userRepo->getWatch() ? false : true));
         $repo->setBranch(json_encode($branches));
         $entityManager->persist($repo);
+        $entityManager->persist($userRepo);
         $entityManager->flush();
         return '';
     }
@@ -75,10 +80,16 @@ class AddRepoController extends AbstractCiWatchController
         $repo->setId($repoGithub['id']);
         $repo->setFullName($repoGithub['full_name']);
         $repo->setBranch(json_encode($branches));
-        $repo->setWatch(true);
-        $repo->setUsers([$user]);
+
+        $userRepo = new UserRepo();
+        $userRepo->setRepo($repo);
+        $userRepo->setUser($user);
+        $userRepo->setWatch(true);
+        $repo->addUserRepoAssociation($userRepo);
+        $user->addUserRepoAssociation($userRepo);
         $repo->setName($repoGithub['name']);
 
+        $entityManager->persist($userRepo);
         $entityManager->persist($repo);
         $entityManager->flush();
     }

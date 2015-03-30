@@ -1,0 +1,11 @@
+dao.abstract:
+  type: abstract
+  properties:
+    doctrineBoot:
+      ref: microwebframe.doctrine
+dao.userrepo:
+  extend: dao.abstract
+  class: Sphring\MicroWebFramework\Dao\UserRepoDao
+dao.repo:
+  extend: dao.abstract
+  class: Sphring\MicroWebFramework\Dao\RepoDao

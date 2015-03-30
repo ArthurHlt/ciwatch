@@ -12,12 +12,15 @@
 
 namespace Sphring\MicroWebFramework\Providers;
 
-
 use Sphring\MicroWebFramework\Model\Repo;
 use Sphring\MicroWebFramework\PlatesExtension\UserSession;
 
 abstract class AbstractProvider implements Provider
 {
+    /**
+     * @var string
+     */
+    protected $imageUrl;
     /**
      * @var UserSession
      */
@@ -42,6 +45,23 @@ abstract class AbstractProvider implements Provider
     public function setUserSession(UserSession $userSession)
     {
         $this->userSession = $userSession;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageUrl()
+    {
+        return $this->imageUrl;
+    }
+
+    /**
+     * @param string $imageUrl
+     * @Required
+     */
+    public function setImageUrl($imageUrl)
+    {
+        $this->imageUrl = $imageUrl;
     }
 
 }

@@ -19,13 +19,13 @@ if (!($user instanceof \Sphring\MicroWebFramework\Model\User)) {
                 Repositories watch
             </h1>
             <hr>
-            <?php if (!$showTable): ?>
+            <?php if (count($repos) == 0): ?>
                 <div class="alert alert-info" role="alert">
                     You have no repositories to watch, add one in
                     <a href="<?php echo $this->route('addRepo'); ?>" class="alert-link">Add repository</a>
                 </div>
             <?php else: ?>
-                <table class="table table-responsive table-striped table-hover">
+                <table class="table table-responsive table-striped table-hover showRepo">
                     <thead>
                     <tr>
                         <th>Name</th>
@@ -34,8 +34,7 @@ if (!($user instanceof \Sphring\MicroWebFramework\Model\User)) {
                     </tr>
                     </thead>
                     <tbody>
-                    <?php foreach ($user->getRepos() as $repo): ?>
-                        <?php if (!$repo->getWatch()): continue; endif; ?>
+                    <?php foreach ($repos as $repo): ?>
                         <tr>
                             <td>
                                 <a href="https://github.com/<?php echo $repo->getFullName(); ?>"><?php echo $repo->getFullName(); ?></a>

@@ -32,3 +32,4 @@ sph-import:
   - github-api.yml
   - util.yml
   - providers.yml
+  - dao.yml
