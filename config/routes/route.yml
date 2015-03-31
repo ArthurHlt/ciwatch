@@ -14,6 +14,10 @@ show:
   route: "/show"
   method: "GET"
   controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.ShowController()
+showReadOnly:
+  route: "/show/{id:number}"
+  method: "GET"
+  controller: !! Sphring.MicroWebFramework.Controller.Ciwatch.ShowReadOnlyController()
 profile:
   route: "/profile"
   method: "GET"

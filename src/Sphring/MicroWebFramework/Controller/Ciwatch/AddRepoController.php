@@ -88,7 +88,7 @@ class AddRepoController extends AbstractCiWatchController
         $repo->addUserRepoAssociation($userRepo);
         $user->addUserRepoAssociation($userRepo);
         $repo->setName($repoGithub['name']);
-
+        $repo->setOrganization($repoGithub['owner']['login']);
         $entityManager->persist($userRepo);
         $entityManager->persist($repo);
         $entityManager->flush();

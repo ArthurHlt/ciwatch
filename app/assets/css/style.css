@@ -115,6 +115,55 @@ footer {
     text-align: center;
 }
 
-.showRepo td a {
-    text-decoration: none !important;
+#myRepeater .table[role="grid"] > tbody > tr:nth-of-type(odd) {
+    background-color: #4e5d6c;
+}
+
+#myRepeater .table[role="grid"] > tbody > tr:hover {
+    background-color: #485563
+}
+
+.repeater-header, .repeater-footer {
+    background-color: #485563;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border: none;
+}
+
+.repeater {
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border: none;
+}
+
+.repeater-list-heading {
+    background-color: rgb(43, 62, 80);
+    border: none;
+    color: white;
+}
+
+.repeater-list table thead > tr > th {
+    border: 1px solid rgb(43, 62, 80);
+    background: none;
+    background-color: rgb(43, 62, 80);
+}
+
+.repeater-list-heading.sortable:hover {
+    background: none;
+    background-color: rgb(78, 93, 108);
+}
+
+.repeater-list-heading.sortable.sorted {
+    background: none;
+    background-color: rgb(78, 93, 108);
+}
+
+.repeater-list table thead > tr > th:first-child {
+    border: 1px solid rgb(78, 93, 108);
+}
+
+.repeater-list table tbody td {
+    border: none;
 }

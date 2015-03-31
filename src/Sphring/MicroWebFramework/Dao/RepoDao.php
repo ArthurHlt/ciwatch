@@ -29,6 +29,7 @@ class RepoDao extends AbstractDao
             ->join(UserRepo::class, 'ur', Join::WITH, 'ur.repo = r')
             ->where('ur.user = ?1')
             ->andWhere('ur.watch = ?2')
+            ->orderBy('r.full_name')
             ->setParameter(1, $user)
             ->setParameter(2, true);
         $q = $qb->getQuery();

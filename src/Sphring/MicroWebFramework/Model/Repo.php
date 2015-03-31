@@ -39,10 +39,16 @@ class Repo
     private $full_name;
     /**
      * @var string
-     * @Column(type="string")
+     * @Column(type="text")
      * @Type("string")
      */
     private $branch;
+
+    /**
+     * @var string
+     * @Column(type="string")
+     */
+    private $organization;
 
     /**
      * @return mixed
@@ -139,6 +145,22 @@ class Repo
     public function removeUserRepoAssociation(UserRepo $userRepo)
     {
         $this->userRepos->removeElement($userRepo);
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
+    }
+
+    /**
+     * @param string $organization
+     */
+    public function setOrganization($organization)
+    {
+        $this->organization = $organization;
     }
 
 }

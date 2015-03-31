@@ -24,7 +24,10 @@ class UserSession implements ExtensionInterface
      * @var bool
      */
     private $devMode = false;
-
+    /**
+     * @var User
+     */
+    private $user;
     /**
      * @var DoctrineBoot
      */
@@ -32,11 +35,15 @@ class UserSession implements ExtensionInterface
 
     public function getUser()
     {
+        if ($this->user !== null) {
+            return $this->user;
+        }
         $entityManager = $this->doctrineBoot->getEntityManager();
         if (!isset($_SESSION['user'])) {
             return null;
         }
-        return $entityManager->find(User::class, $_SESSION['user']);
+        $this->user = $entityManager->find(User::class, $_SESSION['user']);
+        return $this->user;
     }
 
     public function register(Engine $engine)

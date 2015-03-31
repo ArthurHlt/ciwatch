@@ -13,6 +13,7 @@
     <!-- Bootstrap core CSS -->
     <link href="<?php echo $this->asset('css/bootstrap.min.css'); ?>" rel="stylesheet">
     <link href="<?php echo $this->asset('css/bootstrap-toggle.min.css'); ?>" rel="stylesheet">
+    <link href="<?php echo $this->asset('css/fuelux-dev.css'); ?>" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="<?php echo $this->asset('css/style.css'); ?>" rel="stylesheet">
 </head>
@@ -56,9 +57,13 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="<?php echo $this->asset('js/jquery.min.js'); ?>"></script>
+<script src="<?php echo $this->asset('js/underscore-min.js'); ?>"></script>
 <script src="<?php echo $this->asset('js/bootstrap.min.js'); ?>"></script>
 <script src="<?php echo $this->asset('js/bootstrap-toggle.min.js'); ?>"></script>
+<script src="<?php echo $this->asset('js/fuelux.min.js'); ?>"></script>
+
 <?= $this->section('javascript') ?>
+<script src="<?php echo $this->asset('js/main.js'); ?>"></script>
 </body>
 </html>
 
