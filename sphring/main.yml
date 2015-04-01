@@ -1,5 +1,9 @@
 sph-properties-file:
   - ../config/config.yml
+cache:
+  type: cache
+  class:  ArthurH\SphringCache\CacheManager\NullCacheManager
+  cacheSphring: %config.cache%
 microwebframe.main:
   class: Sphring\MicroWebFramework\MicroWebFramework
   properties:

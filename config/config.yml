@@ -2,6 +2,7 @@ config:
   entryPoint: '/app.php'
   assetsDir: '/assets'
   debug: true
+  cache: true
   cacheDir: '/cache'
 security:
   checksumKeyFile: '66b7335d24862a3e204eec3c3622bb9a'

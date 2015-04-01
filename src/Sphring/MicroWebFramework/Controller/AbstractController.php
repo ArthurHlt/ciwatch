@@ -14,6 +14,7 @@
 namespace Sphring\MicroWebFramework\Controller;
 
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -123,22 +124,6 @@ abstract class AbstractController
     }
 
     /**
-     * @return Response
-     */
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
-    /**
-     * @param Response $response
-     */
-    public function setResponse(Response $response)
-    {
-        $this->response = $response;
-    }
-
-    /**
      * @return \Doctrine\ORM\EntityManager
      */
     public function getEntityManager()
@@ -154,13 +139,33 @@ abstract class AbstractController
         return $this->getDoctrineBoot()->getSerializer();
     }
 
-    public function redirect($route)
+    /**
+     * @param $route
+     * @param array $params
+     */
+    public function redirect($route, array $params = [])
     {
         $mwf = $this->getMicroWebFramework();
         $platesExtension = $mwf->getPlateExtensions();
-        $route = $platesExtension['route'];
-        $location = call_user_func_array(array($route, "getRoute"), func_get_args());
-        header('Location: ' . $location);
-        exit();
+        $routeExtension = $platesExtension['route'];
+        $location = call_user_func_array(array($routeExtension, "getRoute"), array_merge([$route], $params));
+        $this->response = new RedirectResponse($location);
+
+    }
+
+    /**
+     * @return Response
+     */
+    public function getResponse()
+    {
+        return $this->response;
+    }
+
+    /**
+     * @param Response $response
+     */
+    public function setResponse(Response $response)
+    {
+        $this->response = $response;
     }
 }

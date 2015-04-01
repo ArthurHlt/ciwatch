@@ -49,17 +49,6 @@ class MicroWebFramework
     {
     }
 
-    public function loadDebug()
-    {
-        if (empty($this->modeDebug)) {
-            ini_set("display_errors", false);
-            return;
-        }
-        $whoops = new Run();
-        $whoops->pushHandler(new PrettyPageHandler());
-        $whoops->register();
-    }
-
     /**
      * @MethodInit()
      */
@@ -75,6 +64,17 @@ class MicroWebFramework
         }
     }
 
+    public function loadDebug()
+    {
+        if (empty($this->modeDebug)) {
+            ini_set("display_errors", false);
+            return;
+        }
+        $whoops = new Run();
+        $whoops->pushHandler(new PrettyPageHandler());
+        $whoops->register();
+    }
+
     public function registerRoute(array $route)
     {
         $route['controller']->setHelpers($this->helpers);
@@ -82,7 +82,10 @@ class MicroWebFramework
             $route['controller']->setArgs($args);
             $route['controller']->setRequest($req);
             $route['controller']->setResponse($resp);
-            $resp->setContent($route['controller']->action());
+
+            $content = $route['controller']->action();
+            $resp = $route['controller']->getResponse();
+            $resp->setContent($content);
             return $resp;
         });
     }

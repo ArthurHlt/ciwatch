@@ -11,7 +11,8 @@
     "knplabs/github-api": "1.4.*",
     "doctrine/orm": "2.4.*",
     "jms/serializer": "0.16.0",
-    "ircmaxell/random-lib": "1.1.*"
+    "ircmaxell/random-lib": "1.1.*",
+    "sphring/sphring-cache": "dev-master"
   },
   "license": "MIT",
   "authors": [
